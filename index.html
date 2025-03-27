@@ -4,14 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sofiya's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
-
-    <!-- FontAwesome (Latest Version) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <style>
+
+
+        
+.section-title {
+    font-size: 3rem;  
+    font-weight: 700;  
+    text-transform: uppercase;  
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 3rem;
+    color: var(--soft-pink);
+}
+
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 5px;
+    background: linear-gradient(90deg, var(--vibrant-pink), var(--deep-maroon));
+    border-radius: 2px;
+}
+
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
         :root {
             --soft-pink: #FFD9DA;
             --vibrant-pink: #EA638C;
@@ -26,6 +61,7 @@
             color: var(--soft-pink);
         }
 
+        
         .nav-link {
             position: relative;
             padding-bottom: 2px;
@@ -47,6 +83,7 @@
             width: 100%;
         }
 
+        
         .typing::after {
             content: "|";
             animation: blink 0.7s infinite;
@@ -56,26 +93,41 @@
             50% { opacity: 0; }
         }
 
-        .floating {
-            animation: floatImage 3s ease-in-out infinite;
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
         }
 
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        
         @keyframes floatImage {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: floatImage 3s ease-in-out infinite;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Header -->
+    <!-- Header & Navigation -->
     <header class="py-6 bg-[var(--dark-gray)] shadow-md fixed w-full z-50">
         <div class="container mx-auto px-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Sofiya</h1>
-            
-            <!-- Navigation -->
+            <h1 class="text-2xl font-bold">
+                Shaifali Chouhan
+            </h1>
+
+            <!-- Desktop Navigation -->
             <nav class="hidden md:block">
                 <ul class="flex space-x-6">
                     <li><a href="#home" class="nav-link">Home</a></li>
@@ -86,7 +138,7 @@
                 </ul>
             </nav>
 
-            <!-- Mobile Menu -->
+            <!-- Mobile Menu Button -->
             <button id="menu-btn" class="md:hidden text-2xl">
                 <i class="fas fa-bars"></i>
             </button>
@@ -97,25 +149,26 @@
     <section id="home" class="hero-section pt-32 pb-20">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
             
-            <!-- Left Side (Text) -->
-            <div class="md:w-1/2 mb-12 md:mb-0">
+            <!-- Left Side (Text Content) -->
+            <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                    Hi, I'm <span class="gradient-text">Sofiya</span>
+                    Hi, I'm <span class="gradient-text">Shaifali</span>
                 </h2>
                 <p class="text-lg mb-6 text-[var(--soft-pink)]">
-                    <span class="font-bold" id="typed-text"></span>
+                    <span class="font-bold" id="typed-text"></span> <!-- Dynamic Typing Text -->
                 </p>
-
-                <!-- Resume -->
-                <a href="resume.pdf" 
-                   class="bg-[var(--vibrant-pink)] text-white px-8 py-3 rounded-full hover:bg-[var(--deep-maroon)] transition">
+                
+                <!-- Resume Download Button -->
+                <a href="https://drive.google.com/file/d/1u54WZOavHSlDbGBoYq8d_UORcvfKIGO3/view?usp=sharing" 
+                   target="_blank" 
+                   class="bg-[var(--vibrant-pink)] text-white px-8 py-3 rounded-full hover:bg-[var(--deep-maroon)] transition fade-in">
                     Download Resume
                 </a>
             </div>
 
-            <!-- Right Side (Image) -->
+            <!-- Right Side (Profile Image) -->
             <div class="md:w-1/2 flex justify-center">
-                <img src="profile.jpg" 
+                <img src="https://your-profile-image-link.jpg" 
                      alt="Sofiya"
                      class="rounded-full shadow-xl floating w-64 h-64">
             </div>
@@ -123,7 +176,7 @@
         </div>
     </section>
 
-    <!-- JavaScript -->
+   
     <script>
         // Typing Animation
         const roles = ["Aspiring Data Analyst", "Python Enthusiast", "SQL Expert", "Data Visualization Specialist"];
@@ -160,6 +213,24 @@
         }
 
         document.addEventListener("DOMContentLoaded", typeEffect);
+
+        // Fade-in Effect on Scroll
+        document.addEventListener("DOMContentLoaded", function () {
+            let elements = document.querySelectorAll(".fade-in");
+
+            function fadeInOnScroll() {
+                elements.forEach((el) => {
+                    let position = el.getBoundingClientRect().top;
+                    let screenHeight = window.innerHeight;
+                    if (position < screenHeight - 50) {
+                        el.classList.add("visible");
+                    }
+                });
+            }
+
+            fadeInOnScroll();
+            window.addEventListener("scroll", fadeInOnScroll);
+        });
     </script>
 
 </body>
