@@ -159,11 +159,28 @@
                 </p>
                 
                 <!-- Resume Download Button -->
-                <a href="images\Resume.pdf" 
-                   target="_blank" 
-                   class="bg-[var(--vibrant-pink)] text-white px-8 py-3 rounded-full hover:bg-[var(--deep-maroon)] transition fade-in" download>
-                    Download Resume
-                </a>
+                <a href="images/Resume.pdf" 
+   id="resumeLink"
+   class="bg-[var(--vibrant-pink)] text-white px-8 py-3 rounded-full hover:bg-[var(--deep-maroon)] transition fade-in">
+    Download Resume
+</a>
+
+<script>
+    document.getElementById("resumeLink").addEventListener("click", function(event) {
+        event.preventDefault(); // Default action rokna
+        let userChoice = confirm("Do you want to Download or View Online?\n\nOK = View Online\nCancel = Download");
+        
+        if (userChoice) {
+            window.open(this.href, "_blank"); // View online
+        } else {
+            let link = document.createElement("a");
+            link.href = this.href;
+            link.download = "Resume.pdf"; // Download force karna
+            link.click();
+        }
+    });
+</script>
+
             </div>
 
             <!-- Right Side (Profile Image) -->
